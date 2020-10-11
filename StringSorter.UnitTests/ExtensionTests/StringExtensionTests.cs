@@ -14,7 +14,7 @@ namespace StringSorter.UnitTests.ExtensionTests
 
             var result = input.SortString();
 
-            Assert.IsEmpty(result);
+            Assert.IsEmpty(result, "Should return empty array when input string is empty.");
         }
 
         [Test]
@@ -38,13 +38,33 @@ namespace StringSorter.UnitTests.ExtensionTests
         }
 
         [Test]
+        public void CleanInputString_InputIsEmpty_ReturnsEmptyString()
+        {
+            var input = string.Empty;
+
+            var result = input.CleanInputString();
+
+            Assert.IsEmpty(result, "Should return empty string when input string is empty.");
+        }
+
+        [Test]
+        public void CleanInputString_InputContainsOnlyPunctuationAndWhitespaces_ReturnsEmptyString()
+        {
+            var input = " #$% !, ...";
+
+            var result = input.CleanInputString();
+
+            Assert.IsEmpty(result, "Should return empty string when input string is empty.");
+        }
+
+        [Test]
         public void CleanInputString_InputContains_Punctuation_UpperCase_Whitespace_ReturnsLowerCaseWords()
         {
             var input = "Contrary to popular belief, the pink unicorn flies east.";
 
             var result = input.CleanInputString();
 
-            Assert.AreEqual("contrarytopopularbeliefthepinkunicornflieseast", result);
+            Assert.AreEqual("contrarytopopularbeliefthepinkunicornflieseast", result, "Should return string with whitespaces and punctuation removed as well as all letters set to lowercase.");
         }
     }    
 }
